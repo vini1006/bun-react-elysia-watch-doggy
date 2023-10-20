@@ -2,14 +2,21 @@
   "name": "vini-elysia-react",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/static": "^0.7.1",
+    "elysia": "latest",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/lodash": "^4.14.200",
+    "@types/react": "^18.2.30",
+    "@types/react-dom": "^18.2.14",
+    "bun-types": "latest",
+    "prettier": "^3.0.3"
   },
   "module": "src/index.js"
 }
