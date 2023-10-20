@@ -24,7 +24,7 @@ export const attachWatcher =
     build().then(_.noop);
 
     let fn: () => void;
-    const watcher = watch('client/', { recursive: true });
+    const watcher = watch(path.dirname(buildConfig.entrypoints[0]), { recursive: true });
     return app.ws(socketConfig.path as string, {
       open(ws) {
         watcher.on('change', (fn = _.debounce(10, () => build().then(() => ws.send('reload')))));
