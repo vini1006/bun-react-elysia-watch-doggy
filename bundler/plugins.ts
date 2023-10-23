@@ -1,17 +1,25 @@
 import type { BunPlugin, PluginBuilder } from 'bun';
-import type { SocketConfig } from './type';
 import fs from 'fs';
 
-export const socketAttachPlugin = (socketConfig: SocketConfig): BunPlugin => ({
+export type SocketPluginConfig = {
+  autoReload: boolean;
+  path: string;
+};
+
+export const socketAttachPlugin = (
+  socketConfig: SocketPluginConfig,
+): BunPlugin => ({
   name: 'socket-attach',
   setup(build: PluginBuilder) {
     build.onLoad({ filter: /index.tsx/ }, async (args) => {
-      const modifiedContent = await fs.promises.readFile(args.path, { encoding: 'utf8' }).then(
-        (originalContent) => `
+      const modifiedContent = await fs.promises
+        .readFile(args.path, { encoding: 'utf8' })
+        .then(
+          (originalContent) => `
           ${originalContent}
           ${socketScripts(socketConfig)}
         `,
-      );
+        );
 
       return {
         loader: 'tsx',
@@ -21,9 +29,11 @@ export const socketAttachPlugin = (socketConfig: SocketConfig): BunPlugin => ({
   },
 });
 
-const socketScripts = (socketConfig: SocketConfig) => `
+const socketScripts = (socketConfig: SocketPluginConfig) => `
   (() => {
       let __socket;
+      let failedCount = 0;
+      
       __initSocket();
     
       function __initSocket () {
@@ -35,14 +45,18 @@ const socketScripts = (socketConfig: SocketConfig) => `
           
         __socket.addEventListener('close', (e) => {
           console.log('🚀watching client closed 🚀');
-          if (${socketConfig.reconnect}) {
+          if (${socketConfig.autoReload} && failedCount < 5) {
             __socket.close();
-            setTimeout(() => __initSocket(), ${socketConfig.reconnectionDelay});
+            setTimeout(() => __initSocket(), 500);
           }
         });
           
         __socket.addEventListener('message', (e) => {
           location.reload();
+        });
+        
+        __socket.addEventListener('error', (e) => {
+          failedCount++;
         });
       }
   })();

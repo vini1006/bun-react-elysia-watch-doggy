@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import 'normalize.css';
+import styled from '@emotion/styled';
+
+import SideBar from '@@/components/SideBar';
+import Header from '@@/components/Header';
+import Body from '@@/components/Body';
+import { useRef, useState } from 'react';
+import { useSideBarControl } from '@@/components/SideBar/hooks/useSideBarControl';
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const { sideBarRef, isSideBarOpen, toggleSideBar } = useSideBarControl();
   return (
-    <>
-      <h1>Hello World</h1>
-      <h2>Count: {count}</h2>
-      <button onClick={() => setCount((count) => count + 1)}>Increase</button>
-    </>
+    <StyledContainer>
+      <SideBar sideBarRef={sideBarRef} />
+      <Header
+        isSideBarOpen={isSideBarOpen}
+        openCloseSideBar={() => toggleSideBar()}
+      />
+      <Body />
+    </StyledContainer>
   );
 };
 
 export default App;
+
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+`;

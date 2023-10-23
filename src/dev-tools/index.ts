@@ -1,12 +1,11 @@
 import type { Elysia } from 'elysia';
-import type { BuildConfig } from 'bun';
-import type { SocketConfig } from './watcher/type';
 import { attachWatcher } from './watcher';
+import { DevBuildConfig } from '@/bundler';
 
-export default (buildConfig: BuildConfig, socketConfig?: SocketConfig) => (app: Elysia) => {
+export default (devBuildConfig: DevBuildConfig) => (app: Elysia) => {
   if (process.env.ENVIRONMENT !== 'development') return app;
 
   // prettier-ignore
   return app
-    .use(attachWatcher(buildConfig, socketConfig))
+    .use(attachWatcher(devBuildConfig))
 };
