@@ -1,26 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 import { useIsSidebarOpened } from '@@/store/sidebar/sidebar';
 
 import ButtonArea from './ButtonArea';
 
-import {
-  Container,
-  hideClassName as styleHideClassName,
-} from './SideBar.style';
+import { Container } from './SideBar.style';
 
 const SideBar = () => {
   const sideBarRef = useRef<HTMLDialogElement>(null);
-  const { opened, hideClassName } = useSideBarControl();
+  const opened = useIsSidebarOpened();
 
   return (
-    <Container ref={sideBarRef} open={opened} className={hideClassName}>
+    <Container ref={sideBarRef} open={opened}>
       <h3
         style={{
           margin: '1rem 1rem 1rem 1rem',
         }}
       >
-        TRYING TO TEST DIALOG HERE WTF
+        Nice To Meet You
       </h3>
       <ButtonArea />
     </Container>
@@ -28,24 +25,3 @@ const SideBar = () => {
 };
 
 export default SideBar;
-
-const useSideBarControl = () => {
-  const isSideBarOpen = useIsSidebarOpened();
-  const [opened, setOpened] = useState(false);
-  const [hideClassName, setHideClassName] = useState('' as string);
-
-  useEffect(() => {
-    if (isSideBarOpen) {
-      setOpened(true);
-      setHideClassName('');
-    } else {
-      setHideClassName(styleHideClassName);
-      setTimeout(() => setOpened(false), 250);
-    }
-  }, [isSideBarOpen]);
-
-  return {
-    opened,
-    hideClassName,
-  };
-};

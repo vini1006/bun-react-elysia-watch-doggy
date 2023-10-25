@@ -125,7 +125,6 @@ Remove the margin in all browsers.
 body {
     justify-content: center;
     width: 100%;
-    height: 100vh;
     margin: 0;
 }
 

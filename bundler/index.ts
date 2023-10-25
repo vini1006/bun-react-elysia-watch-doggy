@@ -21,8 +21,6 @@ export const buildAppDevelopment = (devBuildConfig: DevBuildConfig) =>
     publicPath: '/public/dist/',
     sourcemap: 'external',
   }).then((output) => {
-    console.log('run bundle');
-
     if (!output.success) {
       console.log(output);
     }

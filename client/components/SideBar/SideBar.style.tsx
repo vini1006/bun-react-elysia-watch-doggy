@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-
-const slideOutAnimationName = 'slideOut';
-export const hideClassName = 'hide';
+import { sideBarIndex } from '@@/style/zIndex';
+import { hamburgerHeight } from '@@/components/HamburgerButton/HamburgerButton.style';
 
 export const Container = styled.dialog`
   width: 70vw;
@@ -9,15 +8,12 @@ export const Container = styled.dialog`
   border-radius: 8px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   border: none;
-  z-index: 1;
+  z-index: ${sideBarIndex};
   flex-direction: column;
+  padding: ${hamburgerHeight + 20}px 0;
 
   &[open] {
     animation: slideInFromLeft 0.7s ease normal;
-  }
-
-  &.${hideClassName} {
-    animation: ${slideOutAnimationName} 0.3s ease normal;
   }
 
   @keyframes slideInFromLeft {
@@ -29,16 +25,9 @@ export const Container = styled.dialog`
     }
   }
 
-  @keyframes ${slideOutAnimationName} {
-    from {
-      transform: translateX(0%);
-    }
-    to {
-      transform: translateX(-110%);
-    }
-  }
-
-  ::backdrop {
+  &::backdrop {
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.3);
   }
 `;

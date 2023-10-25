@@ -11,7 +11,9 @@ const useSidebarStore = create<SidebarState>((set) => {
   return {
     isOpened: false,
     actions: {
-      setIsOpened: (isOpened: boolean) => set(() => ({ isOpened })),
+      setIsOpened: (isOpened) => {
+        set(() => ({ isOpened }));
+      },
     },
   };
 });

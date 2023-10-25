@@ -14,7 +14,9 @@ const HamburgerButton = () => {
   return (
     <StyledHamburgerButton
       isSideBarOpen={isSideBarOpen}
-      onClickHandler={() => setIsOpened(!isSideBarOpen)}
+      onClickHandler={() => {
+        setIsOpened(!isSideBarOpen);
+      }}
     />
   );
 };
