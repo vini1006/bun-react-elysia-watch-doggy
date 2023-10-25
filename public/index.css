@@ -125,6 +125,7 @@ Remove the margin in all browsers.
 body {
     justify-content: center;
     width: 100%;
+    height: 100vh;
     margin: 0;
 }
 
@@ -386,6 +387,14 @@ Remove the inner padding in Chrome and Safari on macOS.
 ::-webkit-file-upload-button {
     -webkit-appearance: button; /* 1 */
     font: inherit; /* 2 */
+}
+
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
 /*

@@ -12,7 +12,8 @@ app
       },
     }),
   )
-  .use(staticPlugin())
+  // @ts-ignore
+  .use(staticPlugin({ path: 'public' }))
   .get('/', () => {
     return Bun.file('public/index.html');
   })

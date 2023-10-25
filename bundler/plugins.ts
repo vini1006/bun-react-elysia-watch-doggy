@@ -42,7 +42,7 @@ const socketScripts = (socketConfig: SocketPluginConfig) => `
         __socket.addEventListener('open', (e) => {
           console.log('🚀watching client 🚀');
         });
-          
+        
         __socket.addEventListener('close', (e) => {
           console.log('🚀watching client closed 🚀');
           if (${socketConfig.autoReload} && failedCount < 5) {

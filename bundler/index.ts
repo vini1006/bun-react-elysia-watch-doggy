@@ -19,6 +19,7 @@ export const buildAppDevelopment = (devBuildConfig: DevBuildConfig) =>
     outdir: 'public/dist',
     plugins: [socketAttachPlugin(devBuildConfig.socketConfig)],
     publicPath: '/public/dist/',
+    sourcemap: 'external',
   }).then((output) => {
     console.log('run bundle');
 

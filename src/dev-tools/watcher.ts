@@ -27,15 +27,26 @@ export const attachWatcher =
       recursive: true,
     });
 
+    const funkMap = new Map<string, () => void>();
+
     return app.ws(devBuildConfig.socketConfig.path, {
       open(ws) {
-        watcher.on(
-          'change',
-          _.debounce(100, () => build().then(() => ws.send('reload'))),
-        );
+        const socketID = ws.data.cookie.socketID?.value;
+        if (typeof socketID === 'string') {
+          const sendReload = _.debounce(100, () =>
+            build().then(() => ws.send('reload')),
+          );
+          watcher.addListener('change', sendReload);
+          funkMap.set(socketID, sendReload);
+        }
       },
-      close() {
-        watcher.removeAllListeners('change');
+      close(ws) {
+        const socketID = ws.data.cookie.socketID?.value;
+        if (typeof socketID === 'string' && funkMap.get(socketID)) {
+          const fn = funkMap.get(socketID) || function () {};
+          watcher.removeListener('change', fn);
+          funkMap.delete(socketID);
+        }
       },
     });
   };
