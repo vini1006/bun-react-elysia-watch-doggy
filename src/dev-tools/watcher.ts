@@ -1,5 +1,6 @@
 import type { Elysia } from 'elysia';
 import type { DevBuildConfig } from '@/bundler';
+import EventEmitter from 'events';
 
 import { watch } from 'fs';
 import _ from 'lodash/fp';
@@ -27,16 +28,21 @@ export const attachWatcher =
       recursive: true,
     });
 
+    const eventPass = new EventEmitter();
+
+    watcher.on(
+      'change',
+      _.debounce(100, () => build().then(() => eventPass.emit('reload'))),
+    );
+
     const funkMap = new Map<string, () => void>();
 
     return app.ws(devBuildConfig.socketConfig.path, {
       open(ws) {
         const socketID = ws.data.cookie.socketID?.value;
-        if (typeof socketID === 'string') {
-          const sendReload = _.debounce(100, () =>
-            build().then(() => ws.send('reload')),
-          );
-          watcher.addListener('change', sendReload);
+        if (typeof socketID === 'string' && !funkMap.has(socketID)) {
+          const sendReload = () => ws.send('reload');
+          eventPass.addListener('reload', sendReload);
           funkMap.set(socketID, sendReload);
         }
       },
@@ -44,7 +50,7 @@ export const attachWatcher =
         const socketID = ws.data.cookie.socketID?.value;
         if (typeof socketID === 'string' && funkMap.get(socketID)) {
           const fn = funkMap.get(socketID) || function () {};
-          watcher.removeListener('change', fn);
+          eventPass.removeListener('reload', fn);
           funkMap.delete(socketID);
         }
       },
