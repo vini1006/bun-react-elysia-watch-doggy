@@ -40,5 +40,6 @@ export const attachWatcher =
     });
   };
 
-const builder = (devBuildConfig: DevBuildConfig) => () =>
-  buildAppDevelopment(devBuildConfig).then(_.noop);
+const builder = (devBuildConfig: DevBuildConfig) => () => {
+  return buildAppDevelopment(devBuildConfig).then(_.noop);
+};

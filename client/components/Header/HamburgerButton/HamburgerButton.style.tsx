@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import React from 'react';
 
-const StyledHamburger = styled.button`
+export const clickedClassName = 'clicked';
+
+export const StyledButton = styled.button`
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
@@ -10,7 +12,7 @@ const StyledHamburger = styled.button`
   margin-right: 20px;
 `;
 
-const StyledLines = styled.div`
+export const StyledLines = styled.div`
   width: 100%;
   height: 0.3rem;
   background-color: #939292;
@@ -30,7 +32,7 @@ const StyledLines = styled.div`
     transition: all 0.25s ease-in-out;
   }
 
-  &.clicked {
+  &.${clickedClassName} {
     &:nth-of-type(1) {
       transform: rotate(45deg) translate(0.4rem, 0.8rem);
     }
@@ -46,24 +48,27 @@ const StyledLines = styled.div`
   }
 `;
 
-const HamburgerButton = ({
+export const StyledHamburgerButton = ({
+  onClickHandler,
   isSideBarOpen,
-  openCloseSideBar,
 }: {
+  onClickHandler: () => void;
   isSideBarOpen: boolean;
-  openCloseSideBar: () => void;
 }) => {
   return (
-    <StyledHamburger
-      onClick={() => {
-        openCloseSideBar();
-      }}
-    >
-      <StyledLines className={isSideBarOpen ? 'clicked' : ''} key={'1'} />
-      <StyledLines className={isSideBarOpen ? 'clicked' : ''} />
-      <StyledLines className={isSideBarOpen ? 'clicked' : ''} />
-    </StyledHamburger>
+    <StyledButton onClick={onClickHandler}>
+      <StyledLines
+        className={isSideBarOpen ? clickedClassName : ''}
+        key={'1'}
+      />
+      <StyledLines
+        className={isSideBarOpen ? clickedClassName : ''}
+        key={'2'}
+      />
+      <StyledLines
+        className={isSideBarOpen ? clickedClassName : ''}
+        key={'3'}
+      />
+    </StyledButton>
   );
 };
-
-export default HamburgerButton;

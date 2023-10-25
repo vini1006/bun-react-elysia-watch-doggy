@@ -1,4 +1,4 @@
-import { styled } from '@@/adaptor/emotion';
+import styled from '@emotion/styled';
 import logoImg from '@@/assets/img/logo.svg';
 
 export default styled.button`
