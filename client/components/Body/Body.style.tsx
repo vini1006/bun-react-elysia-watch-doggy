@@ -2,5 +2,11 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled.main`
   width: 100%;
-  flex: 9 1 0;
+  max-height: 100%;
+  padding: 10px 10px;
+  display: grid;
+  column-gap: 5px;
+  row-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 `;

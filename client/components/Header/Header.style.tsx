@@ -5,5 +5,4 @@ export const StyledHeader = styled.header`
   align-items: center;
   display: flex;
   flex-direction: row-reverse;
-  flex: 1 1 0;
 `;

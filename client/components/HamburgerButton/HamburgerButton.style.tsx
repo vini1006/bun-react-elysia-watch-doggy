@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { hamburgerIndex } from '@@/style/zIndex';
 
 const animationTiming = '200ms ease-in-out';
-const barWidth = 35;
+const barWidth = 30;
 const barHeight = 4;
-const hamburgerGap = 10;
+const hamburgerGap = 7;
 const buttonColor = '#ffffff';
 const clickedButtonColor = '#2c2a2a';
 

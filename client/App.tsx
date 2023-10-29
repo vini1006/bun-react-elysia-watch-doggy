@@ -31,8 +31,8 @@ const App = () => {
 export default App;
 
 const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 8vh minmax(300px, 7fr) 0.8fr;
   width: 100vw;
   height: ${get100viewHeight()};
   background-color: #303459;
