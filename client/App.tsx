@@ -32,8 +32,13 @@ export default App;
 
 const StyledContainer = styled.div`
   display: grid;
-  grid-template-rows: 8vh minmax(300px, 7fr) 0.8fr;
+  grid-template-rows: 6vh minmax(300px, 7fr) 0.8fr;
   width: 100vw;
   height: ${get100viewHeight()};
-  background-color: #303459;
+  background: rgb(55, 45, 227);
+  background: linear-gradient(
+    199deg,
+    rgba(55, 45, 227, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
 `;
