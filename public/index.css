@@ -133,6 +133,11 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
 body {
+    @media (min-width: 1064px) {
+        max-width: 60vw;
+        margin: 0 auto;
+    }
+
     background-color: #fafbfc;
     font-family: notoSans, notoSansKR, system-ui, -apple-system,
         /* Firefox supports this but not yet `system-ui` */ 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,

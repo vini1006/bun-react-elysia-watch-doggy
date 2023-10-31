@@ -16,10 +16,9 @@ export const buildAppProduction = () =>
 export const buildAppDevelopment = (devBuildConfig: DevBuildConfig) =>
   Bun.build({
     entrypoints: entryPoints,
-    outdir: 'public/dist',
+    outdir: './public/dist',
     plugins: [socketAttachPlugin(devBuildConfig.socketConfig)],
     publicPath: '/public/dist/',
-    sourcemap: 'external',
   }).then((output) => {
     if (!output.success) {
       console.log(output);

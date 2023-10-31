@@ -17,9 +17,9 @@ const App = () => {
   }, []);
   return (
     <>
-      <HamburgerButton />
-      <SideBar />
       <StyledContainer>
+        <SideBar />
+        <HamburgerButton />
         <Header />
         <Body />
         <Footer />
@@ -31,8 +31,9 @@ const App = () => {
 export default App;
 
 const StyledContainer = styled.div`
+  position: relative;
   display: grid;
-  grid-template-rows: 6vh minmax(300px, 7fr) 0.8fr;
+  grid-template-rows: 6vh minmax(300px, 7fr) 4fr;
   width: 100vw;
   height: ${get100viewHeight()};
   background: rgb(55, 45, 227);

@@ -10,4 +10,5 @@ export const StyledContainer = styled.main`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   margin-bottom: 10px;
+  overflow-y: scroll;
 `;

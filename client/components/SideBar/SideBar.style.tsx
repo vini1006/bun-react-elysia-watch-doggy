@@ -16,12 +16,32 @@ export const Container = styled.dialog`
     animation: slideInFromLeft 0.7s ease normal;
   }
 
+  @media (min-width: 1064px) {
+    &[open] {
+      animation: slideInFromBottom 0.7s ease normal;
+      transform: translateY(30%);
+    }
+
+    width: 50vw;
+    height: 50vh;
+    margin: 0 auto;
+  }
+
   @keyframes slideInFromLeft {
     from {
       transform: translateX(-110%);
     }
     to {
       transform: translateX(0%);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(110%);
+    }
+    to {
+      transform: translateY(30%);
     }
   }
 
