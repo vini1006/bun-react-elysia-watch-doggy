@@ -1,8 +1,6 @@
-# Bun Elysia React
-
-## Getting Started
 
 ```bash
+bun install
 bun run dev
 ```
 
